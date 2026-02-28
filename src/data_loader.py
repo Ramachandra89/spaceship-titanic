@@ -3,7 +3,6 @@ import logging
 import os
 import zipfile
 
-import kaggle
 import pandas as pd
 from dotenv import load_dotenv
 
@@ -37,6 +36,8 @@ def download_raw_data() -> None:
             "KAGGLE_USERNAME and KAGGLE_KEY must be set. "
             "Copy .env.example → .env and fill in your credentials."
         )
+
+    import kaggle
 
     RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
