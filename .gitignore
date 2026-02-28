@@ -1,0 +1,41 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.egg-info/
+.Python
+dist/
+build/
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── Raw & processed data (downloaded separately) ──────────────────────────────
+data/raw/*.csv
+data/processed/*.csv
+
+# ── Trained artefacts (reproduced by the pipeline) ────────────────────────────
+outputs/models/*.pkl
+outputs/figures/
+outputs/submission.csv
+
+# ── MLflow tracking store ─────────────────────────────────────────────────────
+mlruns/
+mlflow.db
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── IDEs / OS ─────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ── Environment files ─────────────────────────────────────────────────────────
+.env
+*.env

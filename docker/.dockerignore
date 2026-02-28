@@ -1,0 +1,21 @@
+# Files/directories to exclude from the Docker build context
+.git/
+.gitignore
+data/
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.env
+.venv/
+venv/
+env/
+mlruns/
+mlflow.db
+outputs/figures/
+outputs/submission.csv
+*.ipynb
+.ipynb_checkpoints/
+.vscode/
+.idea/
+README.md
