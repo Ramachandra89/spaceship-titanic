@@ -58,6 +58,55 @@ git clone https://github.com/Ramachandra89/spaceship-titanic.git
 cd spaceship-titanic
 ```
 
+### Already have a local clone? Sync the latest changes in VS Code
+
+If you cloned the repo earlier and want to pull the latest changes (including the `.env` / Kaggle API key support):
+
+1. **Open your project folder in VS Code** (`File → Open Folder…` → `spaceship-titanic`).
+
+2. **Pull the latest commits** — open the integrated terminal
+   (`Ctrl+`` ` `` on Windows/Linux, ``Cmd+` `` on macOS, or `View → Terminal`) and run:
+
+   ```bash
+   git pull
+   ```
+
+   > If you have local uncommitted changes, stash them first:
+   > ```bash
+   > git stash
+   > git pull
+   > git stash pop
+   > ```
+
+3. **Install the new dependencies** (`kaggle` and `python-dotenv` were added to `requirements.txt`):
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Create your `.env` file** from the committed template:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Open `.env` in VS Code and fill in your Kaggle credentials:
+
+   ```
+   KAGGLE_USERNAME=your_kaggle_username
+   KAGGLE_KEY=your_kaggle_api_key
+   ```
+
+   Your API key is available at **https://www.kaggle.com/settings** → *API* → **Create New Token**.
+
+5. **Run the pipeline** — data will be downloaded automatically on the first run:
+
+   ```bash
+   python main.py
+   ```
+
+---
+
 ### 1b. Set up Kaggle credentials
 
 The pipeline downloads competition data automatically using your Kaggle API key — no `kaggle.json` file is needed.
