@@ -58,13 +58,31 @@ git clone https://github.com/Ramachandra89/spaceship-titanic.git
 cd spaceship-titanic
 ```
 
-### 1b. Download Kaggle data
+### 1b. Set up Kaggle credentials
+
+The pipeline downloads competition data automatically using your Kaggle API key — no `kaggle.json` file is needed.
+
+1. Go to **https://www.kaggle.com/settings** → *API* → **Create New Token**.  
+   Note the `username` and `key` values (they also appear in the downloaded `kaggle.json`).
+2. Copy the template and fill in your credentials:
 
 ```bash
-pip install kaggle
-# Place your kaggle.json API token in ~/.kaggle/kaggle.json
-kaggle competitions download -c spaceship-titanic -p data/raw/
-unzip data/raw/spaceship-titanic.zip -d data/raw/
+cp .env.example .env
+# Edit .env and set:
+#   KAGGLE_USERNAME=your_kaggle_username
+#   KAGGLE_KEY=your_kaggle_api_key
+```
+
+`.env` is listed in `.gitignore` and will never be committed.
+
+### 1c. Download data
+
+Data is downloaded **automatically** the first time you run `python main.py` (see Phase 3).  
+You can also trigger the download on its own:
+
+```python
+from src.data_loader import download_raw_data
+download_raw_data()   # reads .env, downloads + unzips into data/raw/
 ```
 
 ---
@@ -92,12 +110,13 @@ python main.py
 ```
 
 The pipeline:
-1. Loads `data/raw/train.csv` and `test.csv`
-2. Extracts cabin/group features, imputes missing values, one-hot encodes categoricals
-3. Engineers `TotalSpend`, `SpendPerAge`, `IsAlone`
-4. Trains a `GradientBoostingClassifier`
-5. Saves `outputs/models/best_model.pkl` and plots to `outputs/figures/`
-6. Writes `outputs/submission.csv`
+1. **Downloads** raw CSVs from Kaggle (skipped if already present; credentials read from `.env`)
+2. Loads `data/raw/train.csv` and `test.csv`
+3. Extracts cabin/group features, imputes missing values, one-hot encodes categoricals
+4. Engineers `TotalSpend`, `SpendPerAge`, `IsAlone`
+5. Trains a `GradientBoostingClassifier`
+6. Saves `outputs/models/best_model.pkl` and plots to `outputs/figures/`
+7. Writes `outputs/submission.csv`
 
 ---
 

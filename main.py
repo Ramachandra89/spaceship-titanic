@@ -2,7 +2,7 @@
 import logging
 
 from src.config import FIGURES_DIR, MODELS_DIR, OUTPUTS_DIR, PROCESSED_DATA_DIR
-from src.data_loader import load_test, load_train
+from src.data_loader import download_raw_data, load_test, load_train
 from src.feature_engineering import engineer_features
 from src.model import train_model
 from src.predict import predict_test
@@ -17,6 +17,10 @@ def main() -> None:
     ensure_dirs(PROCESSED_DATA_DIR, MODELS_DIR, FIGURES_DIR, OUTPUTS_DIR)
 
     logger.info("=== Spaceship Titanic MLOps Pipeline ===")
+
+    # 0. Download raw data if not already present
+    logger.info("Step 0/4 — Ensuring raw data exists")
+    download_raw_data()
 
     # 1. Load data
     logger.info("Step 1/4 — Loading raw data")
